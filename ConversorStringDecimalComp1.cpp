@@ -5,14 +5,14 @@
 
 int main(){
 	
-	//DeclaraÁ„o das vari·veis
-	char entrada[100];		//Valor do usu·rio
+	//Declara√ß√£o das vari√°veis
+	char entrada[100];		//Valor do usu√°rio
 	char digitos[100];		//Resultado a ser devolvido 
 	int contador = 0;		//Contador para escrever a string de resposta
-	int decimais, numeroEncontrado, negativo;		//Vari·veis para serem usadas em condicionais
+	int decimais, numeroEncontrado, negativo;		//Vari√°veis para serem usadas em condicionais
 	decimais = numeroEncontrado = negativo = 1;
 	
-	//Recebe a expressao do usu·rio
+	//Recebe a expressao do usu√°rio
 	printf("Digite a sentenca a ser processada: \n");
 	fgets(entrada, sizeof(entrada), stdin);
 	
@@ -22,23 +22,30 @@ int main(){
             entrada[tamanho - 1] = '\0';
         }
 	
-	//ComeÁa a leitura
+	//Come√ßa a leitura
 	for(int i=0;i<strlen(entrada);i++){
-		//Verifica se se trata de um dÌgito(0-9)
+		//Verifica se se trata de um d√≠gito(0-9)
 		int digito = isdigit(entrada[i]);
 		
-		if(numeroEncontrado){					//Verifica se a j· encontrou um n˙mero
+		if(numeroEncontrado){					//Verifica se a j√° encontrou um n√∫mero
 			if(digito == 0){
 				if(entrada[i] == '+'){			//Ignora o sinal positivo
 					numeroEncontrado = 0;
 					
-				} else if(entrada[i] == '-'){	//Verifica se a express„o È negativa
+				} else if(entrada[i] == '-'){	//Verifica se a express√£o √© negativa
 					negativo = 0;
 					numeroEncontrado = 0;
 					
-				} else if(isspace(entrada[i])){	//Ignora espaÁos em branco
+				} else if(entrada[i] == '.'){	//Verifica se o n√∫mero inicia como decimal
+					digitos[contador] = '0';
+					contador++;
+					digitos[contador] = '.';
+					contador++;
+					decimais == 0; 
 					
-				} else{							//Finaliza o loop se n„o reconhecer um n˙mero
+				} else if(isspace(entrada[i])){	//Ignora espa√ßos em branco
+				
+				}else{							//Finaliza o loop se n√£o reconhecer um n√∫mero
 					break;
 				}
 				
@@ -48,12 +55,12 @@ int main(){
 					numeroEncontrado = 0;
 				}
 				
-		} else{									//Continua a leitura de um n˙mero j· encontrado
+		} else{									//Continua a leitura de um n√∫mero j√° encontrado
 			if(digito){
 				digitos[contador] = entrada[i];
 				contador++;
 				
-			} else if(decimais){				//Verifica se j· est„o sendo escritos valores decimais
+			} else if(decimais){				//Verifica se j√° est√£o sendo escritos valores decimais
 				if(entrada[i] == '.'){
 					digitos[contador] = '.';
 					contador++;
@@ -62,13 +69,13 @@ int main(){
 					break;
 				}
 					
-			} else{								//Encerra o loop caso n„o consiga fazer a leitura de um n˙mero
+			} else{								//Encerra o loop caso n√£o consiga fazer a leitura de um n√∫mero
 				break;
 			}
 		}
 	}
 	
-	digitos[contador] = '\0';					//Adiciona o dÌgito nulo ao final da string
+	digitos[contador] = '\0';					//Adiciona o d√≠gito nulo ao final da string
 	
     if (contador == 0) {						//Retorna zero se nenhum valor foi encontrado
         strcpy(digitos, "Resultado: 0.00");
