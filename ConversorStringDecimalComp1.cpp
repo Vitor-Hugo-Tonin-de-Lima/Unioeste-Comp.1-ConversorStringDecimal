@@ -62,6 +62,10 @@ int main(){
 				
 			} else if(decimais){				//Verifica se já estão sendo escritos valores decimais
 				if(entrada[i] == '.'){
+					if(entrada[i-1] == '+' || entrada[i-1] == '-'){
+						digitos[contador] = '0';
+						contador++;
+					}
 					digitos[contador] = '.';
 					contador++;
 					decimais = 0;
